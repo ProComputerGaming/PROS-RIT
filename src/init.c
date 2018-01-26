@@ -36,18 +36,22 @@ void initializeIO() {
  * will not start. An autonomous mode selection menu like the pre_auton() in other environments
  * can be implemented in this task if desired.
  */
+
+ //STEP 1: Don't Get Cucked
 void initialize() {
   leftQuad = encoderInit(leftQuadTop, leftQuadBottom, false);
   rightQuad = encoderInit(rightQuadTop, rightQuadBottom, false);
   fullTurnTicks = QUAD_TICKS_PER_REV*((PI * BOT_DIAM_INCHES)/(PI * WHEEL_DIAM_INCHES));
 
-  initMotor(&backLeft, 2, NOT_REVERSED, SLEW_ON);
-  initMotor(&frontLeft, 3, NOT_REVERSED, SLEW_ON);
-  initMotor(&backRight, 4, NOT_REVERSED, SLEW_ON);
-  initMotor(&frontRight, 5, NOT_REVERSED, SLEW_ON);
+  initMotor(&backLeft, 5, NOT_REVERSED, SLEW_ON);
+  initMotor(&frontLeft, 4, NOT_REVERSED, SLEW_ON);
+  initMotor(&backRight, 3, NOT_REVERSED, SLEW_ON);
+  initMotor(&frontRight, 2, NOT_REVERSED, SLEW_ON);
   initMotor(&leftLiftY, 6, NOT_REVERSED, SLEW_ON);
   initMotor(&rightLiftY, 7, REVERSED, SLEW_ON);
-  initMotor(&claw, 8, NOT_REVERSED, SLEW_OFF);
+  initMotor(&rightFour, 8, REVERSED, SLEW_ON);
+  initMotor(&leftFour, 9, NOT_REVERSED, SLEW_ON);
+  initMotor(&claw, 1, REVERSED, SLEW_ON);
 
   motorSlewHandle = taskCreate(motorSlewTask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
 }

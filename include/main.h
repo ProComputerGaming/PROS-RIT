@@ -27,6 +27,9 @@
 
 #include <API.h>
 #include "Motor.h"
+#include "lift.h"
+#include "intake.h"
+#include "drive_base.h"
 #include "auto.h"
 
 // Allow usage of this file in C++ programs
@@ -43,18 +46,20 @@ extern "C" {
 #define QUAD_TICKS_PER_REV 360
 
 //Quad Encoders (Digital)
-#define leftQuadBottom 1
-#define leftQuadTop 2
-#define rightQuadBottom 3
-#define rightQuadTop 4
+#define leftQuadBottom 3
+#define leftQuadTop 4
+#define rightQuadBottom 1
+#define rightQuadTop 2
+
+#define leftScissorSwitch 7
+#define rightScissorSwitch 8
+
 
 #define leftLiftPot 1
 #define rightLiftPot 2
 
-#define clawLimitSwitch 5
-
-#define leftSolenoid 6
-#define rightSolenoid 7
+#define leftSolenoid 5
+#define rightSolenoid 6
 
 #define REVERSED true
 #define NOT_REVERSED false
@@ -71,6 +76,8 @@ Motor backRight;
 Motor frontRight;
 Motor leftLiftY;
 Motor rightLiftY;
+Motor leftFour;
+Motor rightFour;
 Motor claw;
 
 Encoder leftQuad;

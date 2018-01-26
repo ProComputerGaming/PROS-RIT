@@ -1,4 +1,5 @@
-
+#ifndef MOTOR_H_
+#define MOTOR_H_
 
 typedef struct {
   int portNum;
@@ -20,3 +21,5 @@ void setMotor(Motor* motor, int speed);
 void changeMotor(Motor* motor);
 
 void motorSlewTask(void *parameter);
+
+#endif

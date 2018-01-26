@@ -14,8 +14,16 @@ void liftToTicks(int targetTick);
 
 void liftToInches(int targetInches);
 
-void openClaw(int speed);
+void liftScissorTime(int milliseconds, int speed, bool down);
 
-void closeClaw(int milliseconds, int speed);
+void liftFourTime(int milliseconds, int speed, bool down);
+
+void dropCone(int milliseconds, int speed);
+
+void pickupCone(int milliseconds, int speed);
 
 void stopDrive();
+
+void stopAll();
+
+void autoOne();
