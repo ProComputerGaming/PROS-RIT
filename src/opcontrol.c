@@ -43,6 +43,8 @@ void operatorControl() {
 			setMotor(&rightFour, 0);
 		}
 
+		analogDrive();
+
 		// if(joystickGetDigital(1, 8, JOY_UP)){
 		// 	digitalWrite(leftSolenoid, 1);
 		// 	digitalWrite(rightSolenoid, 1);
@@ -54,7 +56,7 @@ void operatorControl() {
 		if(joystickGetDigital(1, 8, JOY_RIGHT))
 			autoOne();
 
-		
+
 		delay(20);
 	}
 }
