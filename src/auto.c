@@ -170,6 +170,51 @@ void backwardTicks(int ticks, int speed){
  }
 
 void autoOne(){
+
+/*
+Plan
+  forwardTicks(250, 127);
+//Forward until Red/Blue && Lower MG
+//Load PL
+
+for(int i = 3; i <= 1; i++){
+
+//Forward
+forwardTicks(250, 127);
+//Pickup/Place
+}
+//Repeat steps 3 & 4 three times
+//Backward until white
+backwardTicks(250, 127);
+//Backward until white
+backwardTicks(250, 127);
+//CCW Rotate 180
+turnLeft(180, 127);
+//Forward
+forwardTicks(250, 127);
+//CCW Rotate 45
+turnLeft(45, 127);
+//Lower MG
+//Backwards until white
+//CW Rotate
+turnRight(90, 127);
+//Forward
+forwardTicks(250, 127);
+//CW Rotate 90
+turnRight(90, 127);
+//Forward
+forwardTicks(250, 127);
+//Pick up cone
+//Forward
+forwardTicks(250, 127);
+//Raise MG
+//Place cone
+//Rotate CW 180
+turnRight(90, 127);
+*/
+
+  /*
+  Mike's code
   liftFourTime(2500, 127, false);
   delay(500);
   liftScissorTime(750, 127, false);
@@ -181,6 +226,7 @@ void autoOne(){
   liftFourTime(1000, 127, false);
   delay(500);
   backwardTicks(250, 127);
+  */
   stopAll();
 }
 
