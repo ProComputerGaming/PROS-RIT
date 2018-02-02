@@ -48,33 +48,36 @@ void liftPID(void *parameter){
 }
 
 void setSyncLift(int targetTicks){
+  liftTargetTicks = targetTicks;
 
+  runLift = true;
 }
 
 void dLeftLiftUp(){
-
+  setMotor(&leftLiftY, 127);
 }
 
 void dLeftLiftDown(){
-
+  setMotor(&leftLiftY, -127);
 }
 
 void dRightLiftUp(){
-
+  setMotor(&rightLiftY, 127);
 }
 
 void dRightLiftDown(){
-
+  setMotor(&rightLiftY, -127);
 }
 
 void stopLeftLift(){
-
+  setMotor(&leftLiftY, 0);
 }
 
 void stopRightLift(){
-
+  setMotor(&rightLiftY, 0);
 }
 
 void stopLift(){
-
+  stopLeftLift();
+  stopRightLift();
 }
