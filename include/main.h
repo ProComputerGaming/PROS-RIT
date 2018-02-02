@@ -83,10 +83,14 @@ Motor claw;
 Encoder leftQuad;
 Encoder rightQuad;
 
+Encoder leftLiftQuad;
+Encoder rightLiftQuad;
+
 int fullTurnTicks;
 
 TaskHandle motorSlewHandle;
 TaskHandle wheelMonitorHandle;
+TaskHandle liftMonitorHandle;
 
 void autonomous();
 
