@@ -34,6 +34,7 @@ void wheelMonitorTask(void *parameter){
         }
       }
       else{
+        stopLeft();
         leftDone = true;
       }
 
@@ -56,6 +57,7 @@ void wheelMonitorTask(void *parameter){
           break;
         }
       }else{
+        stopRight();
         rightDone = true;
       }
 
