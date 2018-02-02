@@ -86,6 +86,7 @@ Encoder rightQuad;
 int fullTurnTicks;
 
 TaskHandle motorSlewHandle;
+TaskHandle wheelMonitorHandle;
 
 void autonomous();
 

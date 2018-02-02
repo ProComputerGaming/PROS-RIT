@@ -1,12 +1,5 @@
 #include "main.h"
 
-void stopDrive(){
-  setMotor(&backLeft, 0);
-  setMotor(&frontLeft, 0);
-  setMotor(&backRight, 0);
-  setMotor(&frontRight, 0);
-}
-
 void stopAll(){
   setMotor(&backLeft, 0);
   setMotor(&frontLeft, 0);
@@ -182,6 +175,10 @@ void autoOne(){
   delay(500);
   backwardTicks(250, 127);
   stopAll();
+}
+
+void skills(){
+
 }
 
 void autonomous() {

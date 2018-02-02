@@ -2,114 +2,94 @@
 
 void wheelMonitorTask(void *parameter){
   while(true){
-          bool dLeftDirection = false;
-          bool dRightDirection = false;
-          bool leftDone = false;
-          bool rightDone = false;
-          bool gyroStepOne = false;
-          bool gyroStepTwo = false;
-          int targetOffset = 0;
+    bool leftDone = false;
+    bool rightDone = false;
 
-          bool run = runWheels;
+    bool run = runWheels;
 
-          int target = wheelTargetTicks;
+    int target = wheelTargetTicks;
 
-          enum WheelDirection d = wheelDir;
+    enum WheelDirection d = wheelDir;
 
-          while(run){
-              run = runWheels;
+    while(run){
 
-              int gyroAverage = (gyroGet(gyroOne) + gyroGet(gyroTwo)) / 2;
-              if(gyro){
-                  if((!leftDone || !rightDone) && !gyroStepOne){
-                      targetOffset =  abs(target) < 45 ? 30 : abs(target * .6);
-                      if(gyroAverage < target - targetOffset){
-                          dLeft(true);
-                          dRight(false);
-                      }else if(gyroAverage > target + targetOffset){
-                          dLeft(false);
-                          dRight(true);
-                      }else{
-                          gyroStepOne = true;
-                          stopDrive();
-                          delay(400);
-                      }
-                  }else if((!leftDone || !rightDone) && !gyroStepTwo){
-                      DRIVEBASE_POWER = (int)((double)DRIVEBASE_POWER * .55);
-                      if(gyroAverage < target){
-                          dLeft(true);
-                          dRight(false);
-                      }else if(gyroAverage > target){
-                          dLeft(false);
-                          dRight(true);
-                      }else{
-                          gyroStepTwo = true;
-                      }
-                      DRIVEBASE_POWER /= .55;
-                  }else{
+      if(abs(encoderGet(leftQuad)) < target){
+        switch(d){
+          case FORWARD:
+          dLeftForward();
+          break;
+          case BACKWARD:
+          dLeftBackward();
+          break;
+          case LEFT:
+          dLeftBackward();
+          break;
+          case RIGHT:
+          dLeftForward();
+          break;
+          default:
+          stopDrive();
+          break;
 
-                      leftDone = true;
-                      rightDone = true;
-                      stopDrive();
-                  }
+        }
+      }
+      else{
+        leftDone = true;
+      }
 
-                  if(leftDone && rightDone){
-                      run = false;
+      if(abs(encoderGet(rightQuad)) < target){
+        switch(d){
+          case FORWARD:
+          dRightForward();
+          break;
+          case BACKWARD:
+          dRightBackward();
+          break;
+          case LEFT:
+          dRightForward();
+          break;
+          case RIGHT:
+          dRightBackward();
+          break;
+          default:
+          stopDrive();
+          break;
+        }
+      }else{
+        rightDone = true;
+      }
 
-                      runWheels = false;
-                      stopDrive();
-                  }
-              }else{
-                  if(abs(encoderGet(leftQuad)) < target){
-                      switch(d){
-                          case FORWARD: dLeftDirection = false; break;
-                          case BACKWARD: dLeftDirection = true; break;
-                          case LEFT: dLeftDirection = true; break;
-                          case RIGHT: dLeftDirection = false; break;
-                      }
-                      dLeft(dLeftDirection);
-                  }else{
-                      leftDone = true;
-                      stopLeft();
-                  }
+      if(leftDone && rightDone){
+        run = false;
 
-                  if(abs(encoderGet(rightQuad)) < target){
-                      switch(d){
-                          case FORWARD: dRightDirection = false; break;
-                          case BACKWARD: dRightDirection = true; break;
-                          case LEFT: dRightDirection = false; break;
-                          case RIGHT: dRightDirection = true; break;
-                      }
-                      dRight(dRightDirection);
-                  }else{
-                      rightDone = true;
-                      stopRight();
-                  }
+        runWheels = false;
 
-                  if(leftDone && rightDone){
-                      run = false;
+        stopDrive();
+      }
 
-                      runWheels = false;
-                      stopDrive();
-                  }
-              }
-              if(leftDone && rightDone){
-                  run = false;
-
-                  runWheels = false;
-
-                  stopDrive();
-              }
-
-              delay(1);
-          }
-          delay(1);
+      delay(1);
+    }
+    delay(1);
   }
 }
 
-void setSyncMove(enum WheelDirection d,int targetTicks, bool enableGyro){
+void setSyncMoveTicks(enum WheelDirection d,int targetTicks){
   wheelTargetTicks = targetTicks;
   wheelDir = d;
+
+  encoderReset(leftQuad);
+  encoderReset(rightQuad);
+
+  runWheels = true;
+}
+
+//TODO ADD INCHES TO TICK CONVERSION
+void setSyncMoveInches(enum WheelDirection d, float targetInches){
+  wheelTargetTicks = targetInches;
+  wheelDir = d;
+
+  encoderReset(leftQuad);
+  encoderReset(rightQuad);
 
   runWheels = true;
 }
@@ -138,9 +118,9 @@ void analogDrive(){
   int leftPower = joystickGetAnalog(1, 3);
   int rightPower = joystickGetAnalog(1, 2);
   if(abs(leftPower) < JOYSTICK_DEADZONE)
-    leftPower = 0;
+  leftPower = 0;
   if(abs(rightPower) < JOYSTICK_DEADZONE)
-    rightPower = 0;
+  rightPower = 0;
   setMotor(&backLeft, leftPower);
   setMotor(&frontLeft, -leftPower);
   setMotor(&backRight, -rightPower);
@@ -158,6 +138,8 @@ void stopRight(){
 }
 
 void stopDrive(){
-  stopLeft();
-  stopRight();
+  setMotor(&backLeft, 0);
+  setMotor(&frontLeft, 0);
+  setMotor(&backRight, 0);
+  setMotor(&frontRight, 0);
 }
