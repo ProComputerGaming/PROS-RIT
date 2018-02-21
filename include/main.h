@@ -46,10 +46,15 @@ extern "C" {
 #define QUAD_TICKS_PER_REV 360
 
 //Quad Encoders (Digital)
-#define leftQuadBottom 3
-#define leftQuadTop 4
+#define leftQuadBottom 7
+#define leftQuadTop 8
 #define rightQuadBottom 1
 #define rightQuadTop 2
+#define leftLiftQuadTop 5
+#define leftLiftQuadBottom 6
+#define rightLiftQuadBottom 3
+#define rightLiftQuadTop 4
+
 
 #define leftScissorSwitch 7
 #define rightScissorSwitch 8
@@ -74,8 +79,8 @@ Motor backLeft;
 Motor frontLeft;
 Motor backRight;
 Motor frontRight;
-Motor leftLiftY;
-Motor rightLiftY;
+Motor leftInLift;
+Motor rightInLift;
 Motor leftFour;
 Motor rightFour;
 Motor claw;

@@ -5,8 +5,8 @@ void stopAll(){
   setMotor(&frontLeft, 0);
   setMotor(&backRight, 0);
   setMotor(&frontRight, 0);
-  setMotor(&leftLiftY, 0);
-  setMotor(&rightLiftY, 0);
+  setMotor(&leftInLift, 0);
+  setMotor(&rightInLift, 0);
   setMotor(&leftFour, 0);
   setMotor(&rightFour, 0);
   setMotor(&claw, 0);
@@ -118,17 +118,17 @@ void backwardTicks(int ticks, int speed){
 
  void liftScissorTime(int milliseconds, int speed, bool down){
    if(down){
-     setMotor(&leftLiftY, -speed);
-     setMotor(&rightLiftY, -speed);
+     setMotor(&leftInLift, -speed);
+     setMotor(&rightInLift, -speed);
      delay(milliseconds);
-     setMotor(&leftLiftY, 0);
-     setMotor(&rightLiftY, 0);
+     setMotor(&leftInLift, 0);
+     setMotor(&rightInLift, 0);
    }else{
-     setMotor(&leftLiftY, speed);
-     setMotor(&rightLiftY, speed);
+     setMotor(&leftInLift, speed);
+     setMotor(&rightInLift, speed);
      delay(milliseconds);
-     setMotor(&leftLiftY, 50);
-     setMotor(&rightLiftY, 50);
+     setMotor(&leftInLift, 50);
+     setMotor(&rightInLift, 50);
 
    }
  }

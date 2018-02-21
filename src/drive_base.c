@@ -124,9 +124,9 @@ void analogDrive(){
   if(abs(rightPower) < JOYSTICK_DEADZONE)
   rightPower = 0;
   setMotor(&backLeft, leftPower);
-  setMotor(&frontLeft, -leftPower);
-  setMotor(&backRight, -rightPower);
-  setMotor(&frontRight, rightPower);
+  //setMotor(&frontLeft, -leftPower);
+  //setMotor(&backRight, -rightPower);
+  //setMotor(&frontRight, rightPower);
 }
 
 void stopLeft(){

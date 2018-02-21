@@ -54,27 +54,27 @@ void setSyncLift(int targetTicks){
 }
 
 void dLeftLiftUp(){
-  setMotor(&leftLiftY, 127);
+  setMotor(&leftInLift, 127);
 }
 
 void dLeftLiftDown(){
-  setMotor(&leftLiftY, -127);
+  setMotor(&leftInLift, -127);
 }
 
 void dRightLiftUp(){
-  setMotor(&rightLiftY, 127);
+  setMotor(&rightInLift, 127);
 }
 
 void dRightLiftDown(){
-  setMotor(&rightLiftY, -127);
+  setMotor(&rightInLift, -127);
 }
 
 void stopLeftLift(){
-  setMotor(&leftLiftY, 0);
+  setMotor(&leftInLift, 0);
 }
 
 void stopRightLift(){
-  setMotor(&rightLiftY, 0);
+  setMotor(&rightInLift, 0);
 }
 
 void stopLift(){
