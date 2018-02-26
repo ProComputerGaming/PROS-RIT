@@ -45,13 +45,14 @@ void initialize() {
 
   initMotor(&backLeft, 5, NOT_REVERSED, SLEW_ON);
   initMotor(&frontLeft, 4, NOT_REVERSED, SLEW_ON);
-  initMotor(&backRight, 2, NOT_REVERSED, SLEW_ON);
-  initMotor(&frontRight, 8, NOT_REVERSED, SLEW_ON);
-  initMotor(&leftInLift, 6, REVERSED, SLEW_ON);
-  initMotor(&rightInLift, 7, NOT_REVERSED, SLEW_ON);
+  initMotor(&backRight, 7, NOT_REVERSED, SLEW_ON);
+  initMotor(&frontRight, 6, NOT_REVERSED, SLEW_ON);
+  initMotor(&leftInLift, 3, REVERSED, SLEW_ON);
+  initMotor(&rightInLift, 8, NOT_REVERSED, SLEW_ON);
   initMotor(&rightFour, 2, REVERSED, SLEW_ON);
   initMotor(&leftFour, 9, REVERSED, SLEW_ON);
   initMotor(&claw, 1, REVERSED, SLEW_ON);
+  initMotor(&goalLift, 10, NOT_REVERSED, SLEW_ON);
 
   motorSlewHandle = taskCreate(motorSlewTask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
 }

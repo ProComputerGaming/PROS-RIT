@@ -38,8 +38,13 @@ void operatorControl() {
 
 		analogDrive();
 
-		if(joystickGetDigital(1, 8, JOY_RIGHT))
-			autoOne();
+		if(joystickGetDigital(1, 8, JOY_UP))
+			setMotor(&goalLift, 127);
+		else if(joystickGetDigital(1, 8, JOY_DOWN)){
+			setMotor(&goalLift, -127);
+		}else{
+			setMotor(&goalLift, 0);
+		}
 
 
 		delay(20);

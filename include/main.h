@@ -84,6 +84,7 @@ Motor rightInLift;
 Motor leftFour;
 Motor rightFour;
 Motor claw;
+Motor goalLift;
 
 Encoder leftQuad;
 Encoder rightQuad;
