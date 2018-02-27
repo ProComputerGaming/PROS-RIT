@@ -26,12 +26,15 @@ void operatorControl() {
 		}
 
 		if(joystickGetDigital(1, 5, JOY_UP)){
-			setMotor(&leftFour, fourPower);
-			setMotor(&rightFour, fourPower);
+			setSyncLift(abs(encoderGet(leftLiftQuad)) + 5);
+			// setMotor(&leftFour, fourPower);
+			// setMotor(&rightFour, fourPower);
 		}else if(joystickGetDigital(1, 5, JOY_DOWN)){
-			setMotor(&leftFour, -fourPower);
-			setMotor(&rightFour, -fourPower);
+			setSyncLift(abs(encoderGet(leftLiftQuad)) - 5);
+			// setMotor(&leftFour, -fourPower);
+			// setMotor(&rightFour, -fourPower);
 		}else{
+			//runLift = false;
 			setMotor(&leftFour, 0);
 			setMotor(&rightFour, 0);
 		}

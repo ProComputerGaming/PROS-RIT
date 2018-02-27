@@ -10,19 +10,26 @@ void liftMonitorTask(void *parameter){
     int target = liftTargetTicks;
 
     while(run){
+      if(abs(encoderGet(leftLiftQuad)) < abs(encoderGet(rightLiftQuad))){
+        leftOffset = SYNCHRONOUS_POWER_OFFSET;
+        rightOffset = 0;
+      }else if(abs(encoderGet(rightLiftQuad)) < abs(encoderGet(leftLiftQuad))){
+        rightOffset = SYNCHRONOUS_POWER_OFFSET;
+        leftOffset = 0;
+      }
 
-      if(encoderGet(leftLiftQuad) < target){
+      if(abs(encoderGet(leftLiftQuad)) < target){
         dLeftLiftUp();
-      }else if(encoderGet(leftLiftQuad) > target){
+      }else if(abs(encoderGet(leftLiftQuad)) > target){
         dLeftLiftDown();
       }else{
         stopLeftLift();
         leftLiftDone = true;
       }
 
-      if(encoderGet(rightLiftQuad) < target){
+      if(abs(encoderGet(rightLiftQuad)) < target){
         dRightLiftUp();
-      }else if(encoderGet(rightLiftQuad) > target){
+      }else if(abs(encoderGet(rightLiftQuad)) > target){
         dRightLiftDown();
       }else{
         stopRightLift();
@@ -54,27 +61,27 @@ void setSyncLift(int targetTicks){
 }
 
 void dLeftLiftUp(){
-  setMotor(&leftInLift, 127);
+  setMotor(&leftFour, LIFT_POWER + leftOffset);
 }
 
 void dLeftLiftDown(){
-  setMotor(&leftInLift, -127);
+  setMotor(&leftFour, -LIFT_POWER - leftOffset);
 }
 
 void dRightLiftUp(){
-  setMotor(&rightInLift, 127);
+  setMotor(&rightFour, LIFT_POWER + rightOffset);
 }
 
 void dRightLiftDown(){
-  setMotor(&rightInLift, -127);
+  setMotor(&rightFour, -LIFT_POWER - rightOffset);
 }
 
 void stopLeftLift(){
-  setMotor(&leftInLift, 0);
+  setMotor(&leftFour, 0);
 }
 
 void stopRightLift(){
-  setMotor(&rightInLift, 0);
+  setMotor(&rightFour, 0);
 }
 
 void stopLift(){

@@ -4,11 +4,14 @@
 #define HIGH_HEIGHT 930
 #define MID_HEIGHT 650
 #define DOWN_HEIGHT 15
+#define SYNCHRONOUS_POWER_OFFSET 20
+#define LIFT_POWER 80
 
 //LiftMonitorTask variables
 bool runLift;
 int liftTargetTicks;
-int LIFT_POWER;
+int rightOffset;
+int leftOffset;
 
 void liftMonitorTask(void *parameter);
 void liftPID(void *parameter);

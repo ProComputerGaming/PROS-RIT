@@ -50,10 +50,10 @@ extern "C" {
 #define leftQuadTop 8
 #define rightQuadBottom 1
 #define rightQuadTop 2
-#define leftLiftQuadTop 5
-#define leftLiftQuadBottom 6
-#define rightLiftQuadBottom 3
-#define rightLiftQuadTop 4
+#define leftLiftQuadTop 4
+#define leftLiftQuadBottom 5
+#define rightLiftQuadBottom 1
+#define rightLiftQuadTop 2
 
 
 #define leftScissorSwitch 7

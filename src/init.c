@@ -55,4 +55,5 @@ void initialize() {
   initMotor(&goalLift, 10, NOT_REVERSED, SLEW_ON);
 
   motorSlewHandle = taskCreate(motorSlewTask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
+  liftMonitorHandle = taskCreate(liftMonitorTask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
 }
