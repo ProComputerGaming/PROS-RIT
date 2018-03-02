@@ -39,8 +39,12 @@ void initializeIO() {
 
  //STEP 1: Don't Get Cucked
 void initialize() {
+
   leftQuad = encoderInit(leftQuadTop, leftQuadBottom, false);
   rightQuad = encoderInit(rightQuadTop, rightQuadBottom, false);
+  leftLiftQuad = encoderInit(leftLiftQuadTop, leftLiftQuadBottom, false);
+  rightLiftQuad = encoderInit(rightLiftQuadTop, rightLiftQuadBottom, false);
+  intakeQuad = encoderInit(intakeQuadTop, intakeQuadBottom, false);
   fullTurnTicks = QUAD_TICKS_PER_REV*((PI * BOT_DIAM_INCHES)/(PI * WHEEL_DIAM_INCHES));
 
   initMotor(&backLeft, 5, NOT_REVERSED, SLEW_ON);
@@ -51,9 +55,12 @@ void initialize() {
   initMotor(&rightInLift, 8, NOT_REVERSED, SLEW_ON);
   initMotor(&rightFour, 2, REVERSED, SLEW_ON);
   initMotor(&leftFour, 9, REVERSED, SLEW_ON);
-  initMotor(&claw, 1, REVERSED, SLEW_ON);
+  initMotor(&intake, 1, REVERSED, SLEW_ON);
   initMotor(&goalLift, 10, NOT_REVERSED, SLEW_ON);
 
+
   motorSlewHandle = taskCreate(motorSlewTask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
+  wheelMonitorHandle = taskCreate(wheelMonitorTask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
   liftMonitorHandle = taskCreate(liftMonitorTask, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
+  //intakePIDHandle = taskCreate(intakePID, TASK_DEFAULT_STACK_SIZE, NULL, TASK_PRIORITY_DEFAULT);
 }

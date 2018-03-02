@@ -18,18 +18,18 @@ void liftMonitorTask(void *parameter){
         leftOffset = 0;
       }
 
-      if(abs(encoderGet(leftLiftQuad)) < target){
+      if(abs(encoderGet(leftLiftQuad)) < target - LIFT_DEADZONE){
         dLeftLiftUp();
-      }else if(abs(encoderGet(leftLiftQuad)) > target){
+      }else if(abs(encoderGet(leftLiftQuad)) > target + LIFT_DEADZONE){
         dLeftLiftDown();
       }else{
         stopLeftLift();
         leftLiftDone = true;
       }
 
-      if(abs(encoderGet(rightLiftQuad)) < target){
+      if(abs(encoderGet(rightLiftQuad)) < target - LIFT_DEADZONE){
         dRightLiftUp();
-      }else if(abs(encoderGet(rightLiftQuad)) > target){
+      }else if(abs(encoderGet(rightLiftQuad)) > target + LIFT_DEADZONE){
         dRightLiftDown();
       }else{
         stopRightLift();
@@ -77,11 +77,11 @@ void dRightLiftDown(){
 }
 
 void stopLeftLift(){
-  setMotor(&leftFour, 0);
+  setMotor(&leftFour, 15);
 }
 
 void stopRightLift(){
-  setMotor(&rightFour, 0);
+  setMotor(&rightFour, 15);
 }
 
 void stopLift(){

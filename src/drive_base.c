@@ -1,6 +1,7 @@
 #include "main.h"
 
 void wheelMonitorTask(void *parameter){
+  DRIVEBASE_POWER = 127;
   while(true){
     bool leftDone = false;
     bool rightDone = false;
@@ -69,9 +70,9 @@ void wheelMonitorTask(void *parameter){
         stopDrive();
       }
 
-      delay(1);
+      delay(10);
     }
-    delay(1);
+    delay(10);
   }
 }
 

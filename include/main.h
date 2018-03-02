@@ -37,6 +37,10 @@
 extern "C" {
 #endif
 
+#define DEBUG 0
+#define MIN_MOTOR_SPEED -127
+#define MAX_MOTOR_SPEED 127
+
 #define JOYSTICK_DEADZONE 10
 
 //Quadrature math constants
@@ -46,14 +50,19 @@ extern "C" {
 #define QUAD_TICKS_PER_REV 360
 
 //Quad Encoders (Digital)
-#define leftQuadBottom 7
-#define leftQuadTop 8
-#define rightQuadBottom 1
-#define rightQuadTop 2
+#define leftQuadBottom 6
+#define leftQuadTop 7
+#define rightQuadBottom 11
+#define rightQuadTop 12
 #define leftLiftQuadTop 4
 #define leftLiftQuadBottom 5
 #define rightLiftQuadBottom 1
 #define rightLiftQuadTop 2
+#define intakeQuadTop 8
+#define intakeQuadBottom 9
+#define mgBumpSwitch 10
+
+#define rightIntakeLiftPot 3
 
 
 #define leftScissorSwitch 7
@@ -83,7 +92,7 @@ Motor leftInLift;
 Motor rightInLift;
 Motor leftFour;
 Motor rightFour;
-Motor claw;
+Motor intake;
 Motor goalLift;
 
 Encoder leftQuad;
@@ -92,7 +101,11 @@ Encoder rightQuad;
 Encoder leftLiftQuad;
 Encoder rightLiftQuad;
 
+Encoder intakeQuad;
+
 int fullTurnTicks;
+
+bool PID_EN;
 
 TaskHandle motorSlewHandle;
 TaskHandle wheelMonitorHandle;

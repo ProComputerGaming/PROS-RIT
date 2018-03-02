@@ -20,7 +20,7 @@ int DRIVEBASE_POWER;
 
 
 void wheelMonitorTask(void *parameter);
-void setSyncMove(enum WheelDirection d,int targetTicks, bool enableGyro);
+void setSyncMoveTicks(enum WheelDirection d, int targetTicks);
 void dLeftBackward();
 void dLeftForward();
 void dRightBackward();

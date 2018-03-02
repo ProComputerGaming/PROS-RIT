@@ -1,45 +1,64 @@
 #include "main.h"
 
 void operatorControl() {
-	int clawPower = 127;
-	int liftPower = 127;
-	int fourPower = 127;
-	while (1) {
 
+	int lastTime = millis();
+	while (1) {
+		if(millis() - lastTime > 1000){
+			printf("Intake Quad: %d\n", encoderGet(intakeQuad));
+			printf("Left Drive Quad: %d\n", encoderGet(leftQuad));
+			printf("Right Drive Quad: %d\n", encoderGet(rightQuad));
+			printf("Left Lift Quad: %d\n", encoderGet(leftLiftQuad));
+			printf("Right Lift Quad: %d\n", encoderGet(rightLiftQuad));
+			printf("Right Intake Pot: %d\n", analogRead(rightIntakeLiftPot));
+			lastTime = millis();
+		}
 		if(joystickGetDigital(1, 6, JOY_UP)){
-				setMotor(&leftInLift, liftPower);
-				setMotor(&rightInLift, liftPower);
+
+				setMotor(&leftInLift, INTAKE_LIFT_POWER);
+				setMotor(&rightInLift, INTAKE_LIFT_POWER);
 		}else if(joystickGetDigital(1, 6, JOY_DOWN)){
-			setMotor(&leftInLift, -liftPower);
-			setMotor(&rightInLift, -liftPower);
+
+			setMotor(&leftInLift, -INTAKE_LIFT_POWER);
+			setMotor(&rightInLift, -INTAKE_LIFT_POWER);
 		}else{
-			setMotor(&leftInLift, 0);
-			setMotor(&rightInLift, 0);
+				setMotor(&leftInLift, 0);
+				setMotor(&rightInLift, 0);
+
 		}
 
 		if(joystickGetDigital(1, 7, JOY_UP)){
-			setMotor(&claw, -clawPower);
+			suck();
 		}else if(joystickGetDigital(1, 7, JOY_DOWN)){
-			setMotor(&claw, clawPower);
+			drop();
+		}
+
+		if(encoderGet(leftLiftQuad) < encoderGet(rightLiftQuad)){
+			leftOffset = SYNCHRONOUS_POWER_OFFSET;
+			rightOffset = 0;
+		}else if(encoderGet(rightLiftQuad) < encoderGet(leftLiftQuad)){
+			rightOffset = SYNCHRONOUS_POWER_OFFSET;
+			leftOffset = 0;
 		}else{
-			setMotor(&claw, 0);
+			rightOffset = 0;
+			leftOffset = 0;
 		}
 
 		if(joystickGetDigital(1, 5, JOY_UP)){
-			setSyncLift(abs(encoderGet(leftLiftQuad)) + 5);
-			// setMotor(&leftFour, fourPower);
-			// setMotor(&rightFour, fourPower);
+			dLeftLiftUp();
+			dRightLiftUp();
 		}else if(joystickGetDigital(1, 5, JOY_DOWN)){
-			setSyncLift(abs(encoderGet(leftLiftQuad)) - 5);
-			// setMotor(&leftFour, -fourPower);
-			// setMotor(&rightFour, -fourPower);
+			dLeftLiftDown();
+			dRightLiftDown();
 		}else{
-			//runLift = false;
-			setMotor(&leftFour, 0);
-			setMotor(&rightFour, 0);
+			stopLift();
 		}
 
 		analogDrive();
+
+		if(joystickGetDigital(1, 8, JOY_RIGHT)){
+			autoOne();
+		}
 
 		if(joystickGetDigital(1, 8, JOY_UP))
 			setMotor(&goalLift, 127);
